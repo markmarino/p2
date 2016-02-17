@@ -35,22 +35,19 @@
                 <label for='add_letter'>Add a letter</label>
             </div>
             <div class='form-group'>
-                <label for='email'>Email address:</label>
-                <input type='email' class='form-control' name='email' id='email'>
-            </div>
-            <div class='form-group'>
-                <label for='pwd'>Password:</label>
-                <input type='password' class='form-control' name='pwd' id='pwd'>
-            </div>
-            <div class='checkbox'>
-                <label><input type='checkbox' name='remember_me'> Remember me</label>
-            </div>
-            <div class='form-group'>
                 <label for='case_select'>Special Options:</label>
                 <select class='form-control' name='case_select' id='case_select'>
                     <option>lowercase</option>
                     <option>UPPPERCASE</option>
                     <option>Initial Caps</option>
+                </select>
+            </div>
+            <div class='form-group'>
+                <label for='seperator_select'>Select a seperator (default is hypen):</label>
+                <select class='form-control' name='seperator_select' id='seperator_select'>
+                    <option>Hypen</option>
+                    <option>Space</option>
+                    <option>No Seperator</option>
                 </select>
             </div>
             <button type='submit' class='btn btn-default'>Submit</button>

@@ -24,9 +24,9 @@ if(isset($_POST['number_of_words']) && !empty($_POST['number_of_words']))
         #tell the user to enter a number between 4 and 8, and set $num_words back to default
         $error_msg = "Please enter a number between 1 - 8 in the # of Words field. Reverting to default of 4.";
         $num_words = 4;
-   } else if ($num_words >= 4 AND $num_words <= 8) {
+   } else if ($num_words < 4 OR $num_words > 8) {
         #tell the user the range and set $num_words to max
-        $error_msg = "Sorry the maximum number is 8 words. Setting to max.";
+        $error_msg = "Please enter a number between 1 - 8 in the # of Words field. Reverting to default of 4.";
         $num_words = 8;
    }
 }
@@ -36,8 +36,15 @@ if(isset($_POST['case_select']) && !empty($_POST['case_select']))
 }
 if(isset($_POST['seperator_select']) && !empty($_POST['seperator_select']))
 {
-   $seperator_char = $_POST['seperator_select']; #set value from POST
+    if ($_POST['seperator_select'] == "Hypen") {
+        $seperator_char = "-";
+    } else if ($_POST['seperator_select'] == "Space") {
+        $seperator_char = " ";
+    } else if ($_POST['seperator_select'] == "No Seperator") {
+        $seperator_char = "";
+    }
 }
+
 
 $rand_keys = array_rand($word_list,$num_words);
 $word_count = count($word_list);
