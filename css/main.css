@@ -1,0 +1,10 @@
+body {
+    background-color:#FBF8EF;
+}
+
+.container {
+	width:50%;
+	min-width:600px;
+	margin-bottom:50px;
+	text-align:left;
+}

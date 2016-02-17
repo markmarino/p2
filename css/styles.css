@@ -1,0 +1,25 @@
+.password {
+    text-align:center;
+    font-size:3rem;
+    margin-bottom:25px;
+    color:#f39c12;
+    font-family:consolas,courier;
+    background-color:#eee;
+    display:inline-block;
+    padding:15px;
+    font-weight:800;
+}
+
+#number_of_words {
+    width:40px;
+}
+
+.details {
+    margin-top:25px;
+}
+
+.error {
+    height:20px;
+    color:red;
+    padding:5px;
+}
