@@ -16,38 +16,40 @@
 <body>
     <div class='container'>
 
-        <h1>Clutch Password Generator v1</h1>
-
-        <p>A password generator for fans of the band Cluth. This password generator uses a dictionary of words taken from Clutch songs. Obviously the entropy of this list is laughably small *if* the nefarious password cracker knew you were a Clutch fan and used this to generate your password and only used this dictionary list to brute force crack your password. Barring that, the idea is that prominent words from lyrics/song titles are more likely to be sticky in your brain than random dictionary words. Admittedly, I have absolutely no scientific evidence of that.</p><br>
+        <h1>Clutch Password Generator</h1>
+        <div class="well">
+            <p>A password generator for fans of the band <a href="http://www.pro-rock.com/" target="_blank">Clutch</a>. This password generator uses a dictionary of words taken from Clutch songs. Obviously, the entropy of this list is laughably small *if* the nefarious password cracker knew you were a Clutch fan *and* knew you used this to generate your password *and* the cracker knew this dictionary list to brute force crack your password. Barring that, the idea is that prominent words from lyrics/song titles are more likely to be sticky in your brain than random dictionary words. Admittedly, I have absolutely no scientific evidence of that. Also, <a href="https://youtu.be/s4ABpbxIPFI" target="_blank">Clutch is awesome</a>, even if their videos are pretty low-budget.</p>
+        </div>
+        <br>
         <p class='password'><?=$generated_password?></p>
 
-        <form role='form' action='index.php' method='POST'>
+        <form role='form' action='index.php' method='GET'>
             <div class='form-group'>
                 <label for='number_of_words'># of Words</label>
-                <input maxlength=2 type='text' name='number_of_words' id='number_of_words' value=''>  (Max 8 words)
+                <input maxlength=2 type='text' name='number_of_words' id='number_of_words' value='<?php echo $num_words; ?>'>  (minimum of 4 words, maximum of 8 words)
             </div>
             <div class='form-group'>
-                <input type='checkbox' name='add_number' id='add_number'>
+                <input type='checkbox' name='add_number' id='add_number' value="1" <?php if(isset($_GET['add_number'])) { echo 'checked'; } ?> >
                 <label for='add_number'>Add a number</label>
-                <input type='checkbox' name='add_symbol' id='add_symbol'>
+                <input type='checkbox' name='add_symbol' id='add_symbol' value="1" <?php if(isset($_GET['add_symbol'])) { echo 'checked'; } ?> >
                 <label for='add_symbol'>Add a symbol</label>
-                <input type='checkbox' name='add_letter' id='add_letter'>
-                <label for='add_letter'>Add a letter</label>
+                <input type='checkbox' name='make_1337' id='make_1337' value="1" <?php if(isset($_GET['make_1337'])) { echo 'checked'; } ?> >
+                <label for='make_1337'>Make it 1337! (Convert to LEET SPEAK.)</label>
             </div>
             <div class='form-group'>
                 <label for='case_select'>Special Options:</label>
                 <select class='form-control' name='case_select' id='case_select'>
-                    <option>lowercase</option>
-                    <option>UPPPERCASE</option>
-                    <option>Initial Caps</option>
+                    <option <?php if (isset($_GET["case_select"]) && $_GET["case_select"]=="lowercase") echo "selected";?>>lowercase</option>
+                    <option <?php if (isset($_GET["case_select"]) && $_GET["case_select"]=="UPPERCASE") echo "selected";?>>UPPERCASE</option>
+                    <option <?php if (isset($_GET["case_select"]) && $_GET["case_select"]=="Initial Caps") echo "selected";?>>Initial Caps</option>
                 </select>
             </div>
             <div class='form-group'>
                 <label for='seperator_select'>Select a seperator (default is hypen):</label>
                 <select class='form-control' name='seperator_select' id='seperator_select'>
-                    <option>Hypen</option>
-                    <option>Space</option>
-                    <option>No Seperator</option>
+                    <option <?php if (isset($_GET["seperator_select"]) && $_GET["seperator_select"]=="Hypen") echo "selected";?>>Hypen</option>
+                    <option <?php if (isset($_GET["seperator_select"]) && $_GET["seperator_select"]=="Space") echo "selected";?>>Space</option>
+                    <option <?php if (isset($_GET["seperator_select"]) && $_GET["seperator_select"]=="No Seperator") echo "selected";?>>No Seperator</option>
                 </select>
             </div>
             <button type='submit' class='btn btn-default'>Submit</button>

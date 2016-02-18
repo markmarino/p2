@@ -1,6 +1,6 @@
 <?php
 
-#echo '<pre>'.print_r($_POST).'</pre>';
+#echo '<pre>'.print_r($_GET).'</pre>';
 
 #init variables
 $lower = "abcdefghijklmnopqrstuvwxyz";
@@ -15,36 +15,35 @@ $num_words = 4;
 $word_list = array("Elephant","Velocity","Regulator","Unstoppable","Wolfman","Shotgun","Burning","Circus","Beard","Cyborg","Cypress","Jackalope","Electric","Rocker","Escape","Freakonomics","Ghost","Gravel","Outdoors","Guild","Assassins","Consecrator","Hoodoo","Impetus","Swollen","Juggernaut","Mercury","Minotaur","Mob","Motherless","Freedom","Restraints","Doom","Skyway","Fury","Kraken","Destruction","Banshee","Merchant","Hustle","Dragonfly","Incomparable","Yeti","Breach","Wookie","Wishbone","Worm");
 
 #process POST form data
-if(isset($_POST['number_of_words']) && !empty($_POST['number_of_words']))
+if(isset($_GET['number_of_words']) && !empty($_GET['number_of_words']))
 {
-   $num_words = $_POST['number_of_words']; #set value from POST
+   $num_words = $_GET['number_of_words']; #set value from POST
    #make sure we got a number
    if(!is_numeric($num_words)){
         #value entered was not a number
         #tell the user to enter a number between 4 and 8, and set $num_words back to default
-        $error_msg = "Please enter a number between 1 - 8 in the # of Words field. Reverting to default of 4.";
+        $error_msg = "Please enter a number between 4 - 8 in the # of Words field. Reverting to default of 4.";
         $num_words = 4;
    } else if ($num_words < 4 OR $num_words > 8) {
         #tell the user the range and set $num_words to max
-        $error_msg = "Please enter a number between 1 - 8 in the # of Words field. Reverting to default of 4.";
-        $num_words = 8;
+        $error_msg = "Please enter a number between 4 - 8 in the # of Words field. Reverting to default of 4.";
+        $num_words = 4;
    }
 }
-if(isset($_POST['case_select']) && !empty($_POST['case_select']))
+if(isset($_GET['case_select']) && !empty($_GET['case_select']))
 {
-   $case_mode = $_POST['case_select']; #set value from POST
+   $case_mode = $_GET['case_select']; #set value from POST
 }
-if(isset($_POST['seperator_select']) && !empty($_POST['seperator_select']))
+if(isset($_GET['seperator_select']) && !empty($_GET['seperator_select']))
 {
-    if ($_POST['seperator_select'] == "Hypen") {
+    if ($_GET['seperator_select'] == "Hypen") {
         $seperator_char = "-";
-    } else if ($_POST['seperator_select'] == "Space") {
+    } else if ($_GET['seperator_select'] == "Space") {
         $seperator_char = " ";
-    } else if ($_POST['seperator_select'] == "No Seperator") {
+    } else if ($_GET['seperator_select'] == "No Seperator") {
         $seperator_char = "";
     }
 }
-
 
 $rand_keys = array_rand($word_list,$num_words);
 $word_count = count($word_list);
@@ -64,6 +63,30 @@ for($i = 0; $i<$num_words; $i++){
 }
 #trim last extraneous seperator character from the end of the $generated_password string
 $generated_password = rtrim($generated_password,$seperator_char);
+
+# should we leet speak it?
+if (isset($_GET['make_1337'])) {
+        $nonleet_lower_chars = array("l", "e", "a", "s", "t", "o");
+        $nonleet_upper_chars = array("L", "E", "A", "S", "T", "O");
+        $leet_chars    = array("1", "3", "4", "5", "7", "0");
+
+        $generated_password = str_replace($nonleet_lower_chars, $leet_chars, $generated_password);
+        $generated_password = str_replace($nonleet_upper_chars, $leet_chars, $generated_password);
+}
+
+#finally, should we append a number or special character to it?
+function random_char($string) {
+  $i = mt_rand(0, strlen($string)-1);
+  return $string[$i];
+}
+if (isset($_GET['add_number'])) {
+        $random_number = random_char($numbers);
+        $generated_password .= $seperator_char . $random_number;
+}
+if (isset($_GET['add_symbol'])) {
+        $random_symbol = random_char($symbols);
+        $generated_password .= $seperator_char . $random_symbol;
+}
 #echo $generated_password;
 #echo $word_count;
 ?>
