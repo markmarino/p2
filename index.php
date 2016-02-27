@@ -45,11 +45,11 @@
                 </select>
             </div>
             <div class='form-group'>
-                <label for='seperator_select'>Select a seperator (default is hypen):</label>
-                <select class='form-control' name='seperator_select' id='seperator_select'>
-                    <option <?php if (isset($_GET["seperator_select"]) && $_GET["seperator_select"]=="Hypen") echo "selected";?>>Hypen</option>
-                    <option <?php if (isset($_GET["seperator_select"]) && $_GET["seperator_select"]=="Space") echo "selected";?>>Space</option>
-                    <option <?php if (isset($_GET["seperator_select"]) && $_GET["seperator_select"]=="No Seperator") echo "selected";?>>No Seperator</option>
+                <label for='separator_select'>Select a separator (default is hyphen):</label>
+                <select class='form-control' name='separator_select' id='separator_select'>
+                    <option <?php if (isset($_GET["separator_select"]) && $_GET["separator_select"]=="hyphen") echo "selected";?>>hyphen</option>
+                    <option <?php if (isset($_GET["separator_select"]) && $_GET["separator_select"]=="space") echo "selected";?>>space</option>
+                    <option <?php if (isset($_GET["separator_select"]) && $_GET["separator_select"]=="No separator") echo "selected";?>>No separator</option>
                 </select>
             </div>
             <button type='submit' class='btn btn-default'>Submit</button>
